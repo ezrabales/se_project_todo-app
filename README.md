@@ -1,17 +1,17 @@
 # Simple Todo App
 
-Give a brief description of the project here. Feel free to give it a different name.
+This is a simple app that tracks a todo list.
 
 ## Functionality
 
-Give a more detailed explanation of the project and its functionality.
+You can create new tasks, you can mark them as completed, as well as delete them.
 
 ## Technology
 
-Give a description of the technologies and techniques used. Pictures, GIFs, or screenshots that detail the project features are recommended.
+This project is created using a class system, where code is created and applied by using its corresponding class.
 
 ## Deployment
 
 This project is deployed on GitHub Pages:
 
-- ADD LINK HERE
+- [link to gitHub page](https://ezrabales.github.io/se_project_todo-app/)
