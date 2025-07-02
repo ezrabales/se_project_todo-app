@@ -1,14 +1,13 @@
 import { validationConfig } from "../utils/constants.js";
-import { todoCounter } from "../pages/index.js";
 import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
-  constructor(popupSelector, callBack) {
-    super(popupSelector);
+  constructor(popupElement, callBack) {
+    super(popupElement);
     this._callBack = callBack;
   }
   _getInputValues() {
-    const inputList = this._popupSelector.querySelectorAll(
+    const inputList = this._popupElement.querySelectorAll(
       validationConfig.inputSelector
     );
     const inputValues = {};
@@ -19,11 +18,12 @@ export default class PopupWithForm extends Popup {
   }
   setEventListeners() {
     super.setEventListeners();
-    this._popupSelector
+    this._popupElement
       .querySelector(validationConfig.formSelector)
       .addEventListener("submit", (evt) => {
-        todoCounter.updateTotal(true);
-        this._callBack(evt);
+        evt.preventDefault();
+        this._callBack(this._getInputValues());
+        this.close();
       });
   }
 }

@@ -16,7 +16,7 @@ export class Todo {
     this._dataName = data.name;
     this._dataCompleted = data.completed;
     this._dueDate = new Date(data.date);
-    this._id = data.uniqueId;
+    this._id = data.id;
     this._updateCompleted = updateCompleted;
     this._updateTotal = updateTotal;
   }

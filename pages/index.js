@@ -5,12 +5,11 @@ import { Todo } from "../components/Todo.js";
 import { FormValidator } from "../components/FormValidator.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import TodoCounter from "../components/TodoCounter.js";
+import Section from "../components/Section.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
-const todoTemplate = document.querySelector("#todo-template");
 const todosList = document.querySelector(".todos__list");
 
 export const todoCounter = new TodoCounter(
@@ -18,30 +17,29 @@ export const todoCounter = new TodoCounter(
   validationConfig.counterText
 );
 
-const todoForm = new PopupWithForm(addTodoPopup, (evt) => {
-  evt.preventDefault();
-  const name = evt.target.name.value;
-  const dateInput = evt.target.date.value;
+const section = new Section({
+  items: initialTodos,
+  renderer: (inputValues) => {
+    renderTodo(inputValues);
+  },
+  containerSelector: ".todos__list",
+});
+
+const todoForm = new PopupWithForm(addTodoPopup, (inputValues) => {
+  todoCounter.updateTotal(true);
+  const name = inputValues.name;
+  const dateInput = inputValues.date;
 
   const date = new Date(dateInput);
   date.setMinutes(date.getMinutes() + date.getTimezoneOffset());
 
-  const uniqueId = uuidv4();
+  const id = uuidv4();
 
-  const values = { name, date, uniqueId };
-  renderTodo(values);
-  todoForm.close();
-  newFormValidator.resetValidation();
+  const values = { name, date, id };
+  const newElement = generateTodo(values);
+  section.addItem(newElement);
 });
 todoForm.setEventListeners();
-
-const openModal = (modal) => {
-  modal.classList.add("popup_visible");
-};
-
-const closeModal = (modal) => {
-  modal.classList.remove("popup_visible");
-};
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
@@ -66,6 +64,4 @@ addTodoButton.addEventListener("click", () => {
   todoForm.open();
 });
 
-initialTodos.forEach((item) => {
-  renderTodo(item);
-});
+section.renderItems();

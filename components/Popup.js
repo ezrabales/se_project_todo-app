@@ -1,14 +1,14 @@
 import { validationConfig } from "../utils/constants.js";
 
 export default class Popup {
-  constructor(popupSelector) {
-    this._popupSelector = popupSelector;
+  constructor(popupElement) {
+    this._popupElement = popupElement;
   }
   open() {
-    this._popupSelector.classList.add(validationConfig.popupVisible);
+    this._popupElement.classList.add(validationConfig.popupVisible);
   }
   close() {
-    this._popupSelector.classList.remove(validationConfig.popupVisible);
+    this._popupElement.classList.remove(validationConfig.popupVisible);
   }
   _handleEscapeClose() {
     document.addEventListener("keydown", (evt) => {
@@ -19,12 +19,12 @@ export default class Popup {
   }
   setEventListeners() {
     this._handleEscapeClose();
-    this._popupSelector
+    this._popupElement
       .querySelector(validationConfig.closeButton)
       .addEventListener("click", () => {
         this.close();
       });
-    this._popupSelector.addEventListener("click", (evt) => {
+    this._popupElement.addEventListener("click", (evt) => {
       if (evt.target.classList.contains(validationConfig.popupVisible)) {
         this.close();
       }

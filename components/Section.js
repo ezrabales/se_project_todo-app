@@ -9,8 +9,7 @@ export default class Section {
       this._renderer(item);
     });
   }
-  addItem(_containerSelector) {
-    const element = document.querySelector(_containerSelector);
-    this._items.append(element);
+  addItem(newElement) {
+    document.querySelector(this._containerSelector).append(newElement);
   }
 }
