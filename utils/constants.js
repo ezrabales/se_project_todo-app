@@ -26,4 +26,8 @@ export const validationConfig = {
   errorClass: "popup__error_visible",
   inputErrorClass: "popup__input_type_error",
   inactiveButtonClass: "button_disabled",
+  popupVisible: "popup_visible",
+  closeButton: ".popup__close",
+  counterText: ".counter__text",
+  todoCompleted: ".todo__completed",
 };
