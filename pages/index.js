@@ -10,7 +10,6 @@ import Section from "../components/Section.js";
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
 const addTodoForm = document.forms["add-todo-form"];
-const todosList = document.querySelector(".todos__list");
 
 export const todoCounter = new TodoCounter(
   initialTodos,
@@ -36,14 +35,14 @@ const todoForm = new PopupWithForm(addTodoPopup, (inputValues) => {
   const id = uuidv4();
 
   const values = { name, date, id };
-  const newElement = generateTodo(values);
+  const newElement = renderTodo(values);
   section.addItem(newElement);
 });
 todoForm.setEventListeners();
 
 const renderTodo = (item) => {
   const todo = generateTodo(item);
-  todosList.append(todo);
+  section.addItem(todo);
 };
 
 const newFormValidator = new FormValidator(validationConfig, addTodoForm);

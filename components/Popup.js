@@ -6,19 +6,18 @@ export default class Popup {
   }
   open() {
     this._popupElement.classList.add(validationConfig.popupVisible);
+    document.addEventListener("keydown", this._handleEscapeClose);
   }
   close() {
     this._popupElement.classList.remove(validationConfig.popupVisible);
+    document.removeEventListener("keydown", this._handleEscapeClose);
   }
-  _handleEscapeClose() {
-    document.addEventListener("keydown", (evt) => {
-      if (evt.key === "Escape") {
-        this.close();
-      }
-    });
-  }
+  _handleEscapeClose = (evt) => {
+    if (evt.key === "Escape") {
+      this.close();
+    }
+  };
   setEventListeners() {
-    this._handleEscapeClose();
     this._popupElement
       .querySelector(validationConfig.closeButton)
       .addEventListener("click", () => {
