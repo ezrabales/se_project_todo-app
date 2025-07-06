@@ -35,8 +35,7 @@ const todoForm = new PopupWithForm(addTodoPopup, (inputValues) => {
   const id = uuidv4();
 
   const values = { name, date, id };
-  const newElement = renderTodo(values);
-  section.addItem(newElement);
+  renderTodo(values);
 });
 todoForm.setEventListeners();
 
